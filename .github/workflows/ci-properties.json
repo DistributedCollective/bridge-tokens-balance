@@ -6,7 +6,7 @@
   "image_name": "sovryn/bridge-tokens-balance",
   "prod_branch": "master",
   "dev_branch": "develop",
-  "dockerfile_path": "./docker/web",
+  "dockerfile_path": ".",
   "APP_ENV_VARS": {
     "PYTHONPATH": "/app/",
     "DJANGO_SETTINGS_MODULE": "config.settings.local",
