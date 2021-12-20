@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    annotations:
+        deployment.kubernetes.io/revision: '1'
+    generation: 1
+    labels:
+        app: bridge-tokens-balance
+    name: bridge-tokens-balance
+spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+        matchLabels:
+            app: bridge-tokens-balance
+    strategy:
+        type: Recreate
+    template:
+        metadata:
+            labels:
+                app: bridge-tokens-balance
+        spec:
+            containers:
+                - image: docker.io/sovryn/bridge-tokens-balance:latest
+                  name: bridge-tokens-balance
+                  resources: {}
+                  env:
+                      - name: DATADOG_API_KEY
+                        valueFrom:
+                            secretKeyRef:
+                                name: data-dog
+                                key: API-KEY
+                      - name: DEBUG
+                        value: 'true'
+            dnsPolicy: ClusterFirst
+            restartPolicy: Always
+            schedulerName: default-scheduler
+            securityContext: {}
+            terminationGracePeriodSeconds: 30
+            imagePullSecrets:
+                - name: regcred

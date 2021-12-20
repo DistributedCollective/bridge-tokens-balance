@@ -1,0 +1,20 @@
+{
+  "app_name": "bridge-tokens-balance",
+  "aws_region": "us-east-2",
+  "k8s_cluster_name": "k8-mainnet",
+  "registry": "docker.io",
+  "image_name": "sovryn/bridge-tokens-balance",
+  "prod_branch": "master",
+  "dev_branch": "develop",
+  "dockerfile_path": "./docker/web",
+  "APP_ENV_VARS": {
+    "PYTHONPATH": "/app/",
+    "DJANGO_SETTINGS_MODULE": "config.settings.local",
+    "C_FORCE_ROOT": "true",
+    "DEBUG": "0",
+    "ETH_L2_NETWORK": "1",
+    "ETH_INTERNAL_NO_FILTER": "1",
+    "DJANGO_SU_NAME": "sovryn",
+    "DJANGO_SU_EMAIL": "sovryn@sovryn.app"
+  }
+}
