@@ -21,7 +21,7 @@ RUN npm prune --production
 FROM base AS release
 
 COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/* .
+COPY --from=builder /app/ .
 
 USER node
 
