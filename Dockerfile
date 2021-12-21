@@ -22,7 +22,7 @@ FROM base AS release
 
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/ .
-
+COPY Bridge.json /app/ 
 USER node
 
 # TODO if works in production without port remove this line

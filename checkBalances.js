@@ -6,7 +6,7 @@ const BigNumber = require('bignumber.js');
 var metrics = require('datadog-metrics');
 metrics.init({ host: 'bridge-balance-checker', prefix: 'bridge.balance.' });
 const ETHs_deficit = 36799000000000000000*1E-18;
-const bridgeABI = require('../sovryn-token-bridge/abis/Bridge.json');
+const bridgeABI = require('./Bridge.json');
 
 const Web3 = require('web3');
 const log4js = require('log4js');
