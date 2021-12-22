@@ -394,12 +394,13 @@ async function run() {
         metrics.gauge('BSC.ETH', myTokens[7].amount);
         metrics.gauge('BSC.ETHbs', tokensOnETHsAgg[1].amount);
         metrics.gauge('BSC.DAI', myTokens[3].amount);
-        metrics.gauge('BSC.DAIes', tokensOnXUSDAgg[3].amount);
+        metrics.gauge('BSC.DAIbs', tokensOnXUSDAgg[3].amount);
         metrics.gauge('BSC.USDC', myTokens[4].amount);
-        metrics.gauge('BSC.USDCes', tokensOnXUSDAgg[4].amount);
+        metrics.gauge('BSC.USDCbs', tokensOnXUSDAgg[4].amount);
         metrics.gauge('BSC.USDT', myTokens[5].amount);
-        metrics.gauge('BSC.USDTes', tokensOnXUSDAgg[5].amount);
+        metrics.gauge('BSC.USDTbs', tokensOnXUSDAgg[5].amount);
         metrics.gauge('BSC.BUSD', myTokens[6].amount);
-        metrics.gauge('BSC.BUSDes', tokensOnXUSDAgg[6].amount);
+        metrics.gauge('BSC.BUSDbs', tokensOnXUSDAgg[6].amount); 
     };
 };
+
