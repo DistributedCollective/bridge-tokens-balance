@@ -4,7 +4,7 @@ const { createLogger, format, transports } = require('winston');
 const BigNumber = require('bignumber.js');
 
 var metrics = require('datadog-metrics');
-metrics.init({ host: 'bridge-balance-checker', prefix: 'bridge.balance.' });
+metrics.init({ prefix: 'bridge.balance.' });
 const ETHs_deficit = 36799000000000000000*1E-18;
 const bridgeABI = require('./Bridge.json');
 
@@ -381,26 +381,47 @@ async function run() {
 
  
     function collectMemoryStats() {
-        metrics.gauge('ETH.ETH', myNativeTokens[0].amount);
-        metrics.gauge('ETH.ETHes', tokensOnETHsAgg[0].amount);
-        metrics.gauge('ETH.DAI', myTokens[0].amount);
-        metrics.gauge('ETH.DAIes', tokensOnXUSDAgg[0].amount);
-        metrics.gauge('ETH.USDC', myTokens[1].amount);
-        metrics.gauge('ETH.USDCes', tokensOnXUSDAgg[1].amount);
-        metrics.gauge('ETH.USDT', myTokens[2].amount);
-        metrics.gauge('ETH.USDTes', tokensOnXUSDAgg[2].amount);
-        metrics.gauge('BSC.BNB', myNativeTokens[1].amount);
-        metrics.gauge('BSC.BNBbs', tokensOnBNBsAgg[0].amount);
-        metrics.gauge('BSC.ETH', myTokens[7].amount);
-        metrics.gauge('BSC.ETHbs', tokensOnETHsAgg[1].amount);
-        metrics.gauge('BSC.DAI', myTokens[3].amount);
-        metrics.gauge('BSC.DAIbs', tokensOnXUSDAgg[3].amount);
-        metrics.gauge('BSC.USDC', myTokens[4].amount);
-        metrics.gauge('BSC.USDCbs', tokensOnXUSDAgg[4].amount);
-        metrics.gauge('BSC.USDT', myTokens[5].amount);
-        metrics.gauge('BSC.USDTbs', tokensOnXUSDAgg[5].amount);
-        metrics.gauge('BSC.BUSD', myTokens[6].amount);
-        metrics.gauge('BSC.BUSDbs', tokensOnXUSDAgg[6].amount); 
+        const ethChain = "ETH-chain"
+        const tokenBalance = "ETH"
+        metrics.gauge('ETH.ETH', myNativeTokens[0].amount,   [ethChain, tokenBalance, "ETH"]);
+        metrics.gauge('ETH.ETHes', tokensOnETHsAgg[0].amount,[ethChain, tokenBalance, "ETHes"]);
+
+        tokenBalance = "DAI"
+        metrics.gauge('ETH.DAI', myTokens[0].amount,         [ethChain, tokenBalance, "DAI"]);
+        metrics.gauge('ETH.DAIes', tokensOnXUSDAgg[0].amount,[ethChain, tokenBalance, "DAIes"]);
+        
+        tokenBalance = "USDC"
+        metrics.gauge('ETH.USDC', myTokens[1].amount,         [ethChain, tokenBalance, "USDC"]);
+        metrics.gauge('ETH.USDCes', tokensOnXUSDAgg[1].amount,[ethChain, tokenBalance, "USDCes"]);
+        
+        tokenBalance = "USDT"
+        metrics.gauge('ETH.USDT', myTokens[2].amount,         [ethChain, tokenBalance, "USDT"]);
+        metrics.gauge('ETH.USDTes', tokensOnXUSDAgg[2].amount,[ethChain, tokenBalance, "USDTes"]);
+        
+        const bscChain = "BSC-chain"
+        tokenBalance = "BNB"
+        metrics.gauge('BSC.BNB', myNativeTokens[1].amount,   [bscChain, tokenBalance, "BNB"]);
+        metrics.gauge('BSC.BNBbs', tokensOnBNBsAgg[0].amount,[bscChain, tokenBalance, "BNBbs"]);
+        
+        tokenBalance = "ETH"
+        metrics.gauge('BSC.ETH', myTokens[7].amount,         [bscChain, tokenBalance, "ETH"]);
+        metrics.gauge('BSC.ETHbs', tokensOnETHsAgg[1].amount,[bscChain, tokenBalance, "ETHbs"]);
+        
+        tokenBalance = "DAI"
+        metrics.gauge('BSC.DAI', myTokens[3].amount,         [bscChain, tokenBalance, "DAI"]);
+        metrics.gauge('BSC.DAIbs', tokensOnXUSDAgg[3].amount,[bscChain, tokenBalance, "DAIbs"]);
+        
+        tokenBalance = "USDC"
+        metrics.gauge('BSC.USDC', myTokens[4].amount,         [bscChain, tokenBalance, "USDC"]);
+        metrics.gauge('BSC.USDCbs', tokensOnXUSDAgg[4].amount,[bscChain, tokenBalance, "USDCbs"]);
+        
+        tokenBalance = "USDT"
+        metrics.gauge('BSC.USDT', myTokens[5].amount,         [bscChain, tokenBalance, "USDT"]);
+        metrics.gauge('BSC.USDTbs', tokensOnXUSDAgg[5].amount,[bscChain, tokenBalance, "USDTbs"]);
+        
+        tokenBalance = "BUSD"
+        metrics.gauge('BSC.BUSD', myTokens[6].amount,         [bscChain, tokenBalance, "BUSD"]);
+        metrics.gauge('BSC.BUSDbs', tokensOnXUSDAgg[6].amount,[bscChain, tokenBalance, "BUSDbs"]);
     };
 };
 
