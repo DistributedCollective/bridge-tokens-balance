@@ -380,48 +380,42 @@ async function run() {
     }
 
  
-    function collectMemoryStats() {
-        const ethChain = "ETH-chain"
-        const tokenBalance = "ETH"
-        metrics.gauge('ETH.ETH', myNativeTokens[0].amount,   [ethChain, tokenBalance, "ETH"]);
-        metrics.gauge('ETH.ETHes', tokensOnETHsAgg[0].amount,[ethChain, tokenBalance, "ETHes"]);
+	function collectMemoryStats() {
+		var metricPrefix = 'eth-rsk.'
+		var rskSideToken = 'rsk-chain'
+		var ethSideToken = 'eth-chain'
 
-        tokenBalance = "DAI"
-        metrics.gauge('ETH.DAI', myTokens[0].amount,         [ethChain, tokenBalance, "DAI"]);
-        metrics.gauge('ETH.DAIes', tokensOnXUSDAgg[0].amount,[ethChain, tokenBalance, "DAIes"]);
-        
-        tokenBalance = "USDC"
-        metrics.gauge('ETH.USDC', myTokens[1].amount,         [ethChain, tokenBalance, "USDC"]);
-        metrics.gauge('ETH.USDCes', tokensOnXUSDAgg[1].amount,[ethChain, tokenBalance, "USDCes"]);
-        
-        tokenBalance = "USDT"
-        metrics.gauge('ETH.USDT', myTokens[2].amount,         [ethChain, tokenBalance, "USDT"]);
-        metrics.gauge('ETH.USDTes', tokensOnXUSDAgg[2].amount,[ethChain, tokenBalance, "USDTes"]);
-        
-        const bscChain = "BSC-chain"
-        tokenBalance = "BNB"
-        metrics.gauge('BSC.BNB', myNativeTokens[1].amount,   [bscChain, tokenBalance, "BNB"]);
-        metrics.gauge('BSC.BNBbs', tokensOnBNBsAgg[0].amount,[bscChain, tokenBalance, "BNBbs"]);
-        
-        tokenBalance = "ETH"
-        metrics.gauge('BSC.ETH', myTokens[7].amount,         [bscChain, tokenBalance, "ETH"]);
-        metrics.gauge('BSC.ETHbs', tokensOnETHsAgg[1].amount,[bscChain, tokenBalance, "ETHbs"]);
-        
-        tokenBalance = "DAI"
-        metrics.gauge('BSC.DAI', myTokens[3].amount,         [bscChain, tokenBalance, "DAI"]);
-        metrics.gauge('BSC.DAIbs', tokensOnXUSDAgg[3].amount,[bscChain, tokenBalance, "DAIbs"]);
-        
-        tokenBalance = "USDC"
-        metrics.gauge('BSC.USDC', myTokens[4].amount,         [bscChain, tokenBalance, "USDC"]);
-        metrics.gauge('BSC.USDCbs', tokensOnXUSDAgg[4].amount,[bscChain, tokenBalance, "USDCbs"]);
-        
-        tokenBalance = "USDT"
-        metrics.gauge('BSC.USDT', myTokens[5].amount,         [bscChain, tokenBalance, "USDT"]);
-        metrics.gauge('BSC.USDTbs', tokensOnXUSDAgg[5].amount,[bscChain, tokenBalance, "USDTbs"]);
-        
-        tokenBalance = "BUSD"
-        metrics.gauge('BSC.BUSD', myTokens[6].amount,         [bscChain, tokenBalance, "BUSD"]);
-        metrics.gauge('BSC.BUSDbs', tokensOnXUSDAgg[6].amount,[bscChain, tokenBalance, "BUSDbs"]);
-    };
+		metrics.gauge(metricPrefix + ethSideToken, myNativeTokens[0].amount, ['token:ETH', 'ETH','stable:no'])
+		metrics.gauge(metricPrefix + rskSideToken, tokensOnETHsAgg[0].amount, ['token:ETH', 'ETHes', 'stable:no'])
+
+		metrics.gauge(metricPrefix + ethSideToken, myTokens[0].amount, ['token:DAI', 'DAI','stable:yes'])
+		metrics.gauge(metricPrefix + rskSideToken, tokensOnXUSDAgg[0].amount, ['token:DAI', 'DAIes','stable:yes'])
+
+		metrics.gauge(metricPrefix + ethSideToken, myTokens[1].amount, ['token:USDC', 'USDC','stable:yes'])
+		metrics.gauge(metricPrefix + rskSideToken, tokensOnXUSDAgg[1].amount, ['token:USDC', 'USDCes','stable:yes'])
+
+		metrics.gauge(metricPrefix + ethSideToken, myTokens[2].amount, ['token:USDT', 'USDT','stable:yes'])
+		metrics.gauge(metricPrefix + rskSideToken, tokensOnXUSDAgg[2].amount, ['token:USDT', 'USDTes','stable:yes'])
+
+		metricPrefix = 'bsc-rsk.'
+		var bscSideToken = 'bsc-chain'
+
+		metrics.gauge(metricPrefix + bscSideToken, myNativeTokens[1].amount, ['token:BNB', 'BNB','stable:no'])
+		metrics.gauge(metricPrefix + rskSideToken, tokensOnBNBsAgg[0].amount, ['token:BNB', 'BNBbs','stable:no'])
+
+		metrics.gauge(metricPrefix + bscSideToken, myTokens[7].amount, ['token:ETH', 'ETH', 'stable:no'])
+		metrics.gauge(metricPrefix + rskSideToken, tokensOnETHsAgg[1].amount, ['token:ETH', 'ETHbs', 'stable:no'])
+
+		metrics.gauge(metricPrefix + bscSideToken, myTokens[3].amount, ['token:DAI', 'DAI','stable:yes'])
+		metrics.gauge(metricPrefix + rskSideToken, tokensOnXUSDAgg[3].amount, ['token:DAI', 'DAIbs','stable:yes'])
+
+		metrics.gauge(metricPrefix + bscSideToken, myTokens[4].amount, ['token:USDC', 'USDC','stable:yes'])
+		metrics.gauge(metricPrefix + rskSideToken, tokensOnXUSDAgg[4].amount, ['token:USDC', 'USDCbs','stable:yes'])
+
+		metrics.gauge(metricPrefix + bscSideToken, myTokens[5].amount, ['token:USDT', 'USDT','stable:yes'])
+		metrics.gauge(metricPrefix + rskSideToken, tokensOnXUSDAgg[5].amount, ['token:USDT', 'USDTbs','stable:yes'])
+
+		metrics.gauge(metricPrefix + bscSideToken, myTokens[6].amount, ['token:BUSD', 'BUSD','stable:yes'])
+		metrics.gauge(metricPrefix + rskSideToken, tokensOnXUSDAgg[6].amount, ['token:BUSD', 'BUSDbs','stable:yes'])
+	};
 };
-
